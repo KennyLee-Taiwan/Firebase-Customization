@@ -1,9 +1,7 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 
-
-pod 'Firebase'
 
 
 
@@ -14,5 +12,10 @@ target 'firebaseTest' do
   use_frameworks!
 
   # Pods for firebaseTest
+  
+
+  pod 'Firebase', '>= 2.5.0'
+  pod 'Firebase/Database'
+  
 
 end

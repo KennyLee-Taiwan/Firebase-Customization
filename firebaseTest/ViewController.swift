@@ -7,13 +7,62 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var importedMessages: UITextField!
+
+    @IBOutlet weak var sentMessage: UITextField!
+
+    @IBAction func sentButtonTapped(sender: AnyObject) {
+        
+        sendMessage()
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+    
+        
     }
+    
+    func sendMessage() {
+        
+        
+        //  Create a reference to a Firebase location
+        var myRootRef = FIRDatabase.database().reference()
+        
+        
+        // Generate an unique ID
+        let myRootRef1 = myRootRef.childByAutoId()
+        
+        //  Write data to Firebase
+        myRootRef1.setValue(sentMessage.text)
+        
+        //  Read data and react to changes
+        myRootRef.observeEventType(.ChildAdded, withBlock: {
+            snapshot in
+            
+            if let value = snapshot.value {
+                
+                self.importedMessages.text = value as! String
+                
+            }
+  
+    
+            //print("\(snapshot.key) -> \(snapshot.value)")
+        })
+        
+        
+        
+    }
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
