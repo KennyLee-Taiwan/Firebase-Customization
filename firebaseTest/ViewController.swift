@@ -15,11 +15,26 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var sentMessage: UITextField!
 
-    @IBAction func sentButtonTapped(sender: AnyObject) {
+
+    
+    @IBAction func sendTapped(sender: AnyObject) {
         
         sendMessage()
         
     }
+    
+
+    
+    @IBAction func eraseTapped(sender: AnyObject) {
+        
+        var myRootRef = FIRDatabase.database().reference()
+        
+        //  Write data to Firebase
+        myRootRef.setValue("")
+        
+    }
+
+    
     
     
     override func viewDidLoad() {
