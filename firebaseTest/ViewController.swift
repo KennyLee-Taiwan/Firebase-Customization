@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 
 
     
-    @IBAction func sendTapped(sender: AnyObject) {
+    @IBAction func sendTapped(_ sender: AnyObject) {
         
         sendMessage()
         
@@ -25,9 +25,9 @@ class ViewController: UIViewController {
     
 
     
-    @IBAction func eraseTapped(sender: AnyObject) {
+    @IBAction func eraseTapped(_ sender: AnyObject) {
         
-        var myRootRef = FIRDatabase.database().reference()
+        let myRootRef = FIRDatabase.database().reference()
         
         //  Write data to Firebase
         myRootRef.setValue("")
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         
         
         //  Create a reference to a Firebase location
-        var myRootRef = FIRDatabase.database().reference()
+        let myRootRef = FIRDatabase.database().reference()
         
         
         // Generate an unique ID
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         myRootRef1.setValue(sentMessage.text)
         
         //  Read data and react to changes
-        myRootRef.observeEventType(.ChildAdded, withBlock: {
+        myRootRef.observe(.childAdded, with: {
             snapshot in
             
             if let value = snapshot.value {
