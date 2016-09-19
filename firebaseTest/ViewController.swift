@@ -10,12 +10,11 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var importedMessages: UITextField!
-
+    
     @IBOutlet weak var sentMessage: UITextField!
-
-
+    
     
     @IBAction func sendTapped(_ sender: AnyObject) {
         
@@ -23,7 +22,7 @@ class ViewController: UIViewController {
         
     }
     
-
+    
     
     @IBAction func eraseTapped(_ sender: AnyObject) {
         
@@ -33,7 +32,7 @@ class ViewController: UIViewController {
         myRootRef.setValue("")
         
     }
-
+    
     
     
     
@@ -41,12 +40,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-    
+        
         
     }
     
     func sendMessage() {
-        
         
         //  Create a reference to a Firebase location
         let myRootRef = FIRDatabase.database().reference()
@@ -58,6 +56,21 @@ class ViewController: UIViewController {
         //  Write data to Firebase
         myRootRef1.setValue(sentMessage.text)
         
+        
+        readMessage()
+        
+        
+        
+        
+        
+    }
+    
+    func readMessage() {
+        
+        //  Create a reference to a Firebase location
+        let myRootRef = FIRDatabase.database().reference()
+        
+        
         //  Read data and react to changes
         myRootRef.observe(.childAdded, with: {
             snapshot in
@@ -67,23 +80,17 @@ class ViewController: UIViewController {
                 self.importedMessages.text = value as! String
                 
             }
-  
-    
-            //print("\(snapshot.key) -> \(snapshot.value)")
+            
         })
-        
-        
-        
     }
     
     
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
